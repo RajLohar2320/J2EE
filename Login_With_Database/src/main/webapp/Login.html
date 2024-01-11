@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Login Page</title>
+	<style>
+		#d2 {
+			width: 250px;
+			display: flex;
+			justify-content: space-between;
+		}
+
+		a {
+			font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+			text-decoration: none;
+		}
+	</style>
+</head>
+
+<body>
+	<form action="Login" method="POST">
+		<div align="center">
+			<h3>Enter Login Credential's</h3>
+			<input type="text" name="uname" id="uname" placeholder="Username"><br>
+			<input type="password" name="pass" id="pass" placeholder="Password"><br><br>
+			<button type="submit" name="btn" value="Login">Login</button>
+			<button type="reset" name="btn" value="Clear">Clear</button><br>
+			<h4 name="res"></h4>
+		</div>
+	</form>
+	<div align="center">
+		<div align="center" id="d2">
+			<a href="./Register.html">Register</a>
+			<a href="./Forgotpass.html">Forgot Password</a>
+		</div>
+	</div>
+</body>
+
+</html>
