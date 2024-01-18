@@ -1,0 +1,13 @@
+package com.demo.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+
+@Controller
+public class HelloSpringBootMVCController {
+	@getMapping("/")
+	public String sayHello(Model m) {
+		m.addAttribute("msg", "Welcome to Hello Page");
+		return "Hello";
+	}
+}

@@ -1,0 +1,13 @@
+package com.demo.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import com.demo.service.*;
+@Controller
+public class UserController {
+	@Autowired
+	private UserService usrvc;
+	public String showLoginPage() {
+		return "login";
+	}
+}

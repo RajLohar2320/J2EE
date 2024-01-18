@@ -1,0 +1,10 @@
+package com.demo.test;
+import com.demo.model.*;
+public class OneToManyTest {
+
+	public static void main(String[] args) {
+		Employee e1 = new Employee(1,"Babu", 35000);
+
+	}
+
+}

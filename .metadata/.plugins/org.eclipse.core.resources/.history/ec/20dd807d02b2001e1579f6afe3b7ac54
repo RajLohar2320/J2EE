@@ -1,0 +1,6 @@
+package com.demo.aop;
+@Component
+@Aspect
+public class Aspects {
+	public checkAge()
+}

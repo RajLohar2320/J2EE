@@ -1,0 +1,14 @@
+package com.demo.service;
+
+import org.springframework.stereotype.Service;
+
+import com.demo.model.User;
+@Service
+public class UserServiceImpl implements UserService{
+
+	public User validate() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

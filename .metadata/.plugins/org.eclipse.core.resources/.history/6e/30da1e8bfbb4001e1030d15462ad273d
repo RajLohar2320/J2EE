@@ -1,0 +1,11 @@
+package com.demo.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+
+@Controller
+public class HelloSpringBootMVCController {
+	public String sayHello(Model m) {
+		return "Hello";
+	}
+}

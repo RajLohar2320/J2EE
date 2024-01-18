@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Login Page</title>
+</head>
+
+<body>
+    <form action="Forgot" method="POST">
+        <div align="center">
+            <h3>Forgot Password</h3><br>
+            <input type="email" name="email" id="email" placeholder="Ente Email"><br>
+            <input type="password" name="pass" id="pass" placeholder="Enter Password"><br><br>
+            <button type="submit" name="btn" value="submit">Submit</button>
+            <button type="reset" name="btn" value="Clear">Clear</button><br>
+        </div>
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+package com.demo.controller;
+
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.demo.model.Product;
+import com.demo.service.ProductService;
+
+@Controller
+public class ProductController {
+	@Autowired
+	private ProductService psrvc;
+	
+	@GetMapping("/products")
+	public ModelAndView getproducts() {
+		List<Product> plist = psrvc.showAll();
+		for(Product p: plist)
+		{
+			System.out.println(p);
+		}
+		return new ModelAndView("Products", "plist", plist);
+	}
+		
+	@PostMapping("/products/{pid}")
+	public ResponseEntity<String> insertProduct(@RequestBody Product p) {
+		psrvc.insert(p);
+		return ResponseEntity.ok("Product Added Successfully");
+	}
+	
+	@PutMapping("/products/{pid}")
+	public ResponseEntity<String> editProduct(@RequestBody Product p) {
+		psrvc.upById(p);
+		return ResponseEntity.ok("Product Updated Successfully");
+	}
+	
+	@PostMapping("/updateProduct")
+	public ModelAndView updateProduct(@RequestParam("pid") int pid, @RequestParam("pname") String pname, @RequestParam("price") double price, @RequestParam("qty") int qty) {
+		psrvc.upById(new Product(pid, pname, price, qty));
+		return new ModelAndView("redirect:/product/getproducts");
+	}
+	
+	@GetMapping("/delete/{id}")
+	public ModelAndView deleteProduct(@PathVariable int id) {
+		if(psrvc.delById(id) > 0)
+			return new ModelAndView("redirect:/product/getproducts");
+		return new ModelAndView("Success", "msg", "Unable to Delete The Product");
+	}
+}

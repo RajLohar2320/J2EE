@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+	xmlns:context="http://www.springframework.org/schema/context">
+	
+	<bean id="sk1" class="com.demo.model.Skill">
+		<constructor-arg index="0" value="1"></constructor-arg>
+		<constructor-arg index="1" value="Web-Developer"></constructor-arg>
+		<constructor-arg index="2" value="5"></constructor-arg>
+	</bean>
+	<bean id="sk2" class="com.demo.model.Skill">
+		<constructor-arg index="0" value="2"></constructor-arg>
+		<constructor-arg index="1" value="DataBase Management"></constructor-arg>
+		<constructor-arg index="2" value="7"></constructor-arg>
+	</bean>
+	<bean id="sk3" class="com.demo.model.Skill">
+		<constructor-arg index="0" value="3"></constructor-arg>
+		<constructor-arg index="1" value="CRUD-Opration"></constructor-arg>
+		<constructor-arg index="2" value="10"></constructor-arg>
+	</bean>
+	
+	<bean id="s1" class="com.demo.model.Student">
+	<constructor-arg type="int" value="1"></constructor-arg>
+	<constructor-arg index="1" value="Ramesh"></constructor-arg>
+	<constructor-arg index="2">
+		<list>Trekking</list>
+		<list>Gotya Playing</list>
+		<list>Bhadwa Phiravne</list>
+	</constructor-arg>
+	<constructor-arg index="3">
+		<bean ref="sk1"></bean>
+		<bean ref="sk2"></bean>
+		<bean ref="sk3"></bean>
+	</constructor-arg>
+	</bean>
+	
+</beans>

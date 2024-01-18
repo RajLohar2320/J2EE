@@ -1,0 +1,11 @@
+package com.demo.test;
+
+import org.springframework.context.ApplicationContext;
+
+public class TestSpring {
+
+	public static void main(String[] args) {
+		ApplicationContext actx = new ClassPathXmlApplicationContext("springconfig.xml");
+	}
+
+}

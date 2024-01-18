@@ -1,0 +1,10 @@
+package com.demo.model;
+
+import java.util.List;
+
+public class Student {
+	private int Sid;
+	private String Sname;
+	private List<Skill> slist;
+	private List<String> Hobbies;
+}

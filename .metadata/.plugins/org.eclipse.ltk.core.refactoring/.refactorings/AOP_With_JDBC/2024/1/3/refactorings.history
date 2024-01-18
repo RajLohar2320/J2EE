@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;AOP_With_JDBC/src/main/resources/text&apos; to &apos;data.properties&apos;" description="Rename resource &apos;text&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/resources/text" name="data.properties" stamp="1705297424064" updateReferences="true"/>
+</session>

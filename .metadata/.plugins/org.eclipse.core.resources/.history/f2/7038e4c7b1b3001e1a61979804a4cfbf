@@ -1,0 +1,27 @@
+package com.demo.controller;
+
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+import com.demo.model.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.demo.service.ProductService;
+
+@Controller
+public class ProductController {
+	@Autowired
+	private ProductService psrvc;
+	
+	public ModelAndView getproducts(HttpSession s) {
+		User u = (User)s.getAttribute("user");
+		if(u != null) {
+			List<Product> plist = psrvc.showAll();
+			return new ModelAndView("displayproduct", "plist", plist);
+		}
+		return new ModelAndView("redirect:/login/");
+	}
+
+}
