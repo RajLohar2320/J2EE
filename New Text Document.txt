@@ -1,0 +1,167 @@
+pom.xml - Dependencies
+
+<properties>
+	   	<maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+		<spring.version>5.2.8.RELEASE</spring.version>
+		<hibernate.version>5.4.21.Final</hibernate.version>
+		<hibernate.validator>5.4.1.Final</hibernate.validator>
+		<c3p0.version>0.9.5.2</c3p0.version>
+		<jstl.version>1.2.1</jstl.version>
+		<tld.version>1.1.2</tld.version>
+		<servlets.version>3.1.0</servlets.version>
+		<jsp.version>2.3.1</jsp.version>
+	</properties>
+	<dependencies>
+		<!-- Spring MVC Dependency -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- JSTL Dependency -->
+		<dependency>
+			<groupId>javax.servlet.jsp.jstl</groupId>
+			<artifactId>javax.servlet.jsp.jstl-api</artifactId>
+			<version>${jstl.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>taglibs</groupId>
+			<artifactId>standard</artifactId>
+			<version>${tld.version}</version>
+		</dependency>
+
+		<!-- Servlet Dependency -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>${servlets.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+
+		<!-- JSP Dependency -->
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>javax.servlet.jsp-api</artifactId>
+			<version>${jsp.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- mysql-connector-java -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.21</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<!-- Use tomcat9 Deploy app here server Values in tags and step 2 maven In the configuration file id Value consistent-->
+					<server>tomcat9</server>
+					<update>true</update>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+---------------------------------------------------------------------------------------------------------------------
+data.properties
+
+jdbc.driverclass=com.mysql.cj.jdbc.Driver
+jdbc.url=jdbc:mysql://localhost:3306/test
+jdbc.uname=root
+jdbc.pass=Raj@20002311
+--------------------------------------------------------------------------------------------------------------------
+
+web.xml
+
+<servlet>
+  	<servlet-name>Spring</servlet-name>
+  	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+  	<load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Spring</servlet-name>
+  	<url-pattern>/</url-pattern>
+  </servlet-mapping>
+
+--------------------------------------------------------------------------------------------------------------------
+Spring-servlet.xml
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.2.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+        <context:annotation-config></context:annotation-config>
+        <context:component-scan base-package="com.demo"></context:component-scan>
+        <mvc:annotation-driven></mvc:annotation-driven>
+        
+        <bean id="placeHolderConfig" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	     	<property name="location" value="data.properties"></property>
+		</bean>
+		
+        <bean id="ds" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	     	<property name="driverClassName" value="${jdbc.driverclass}"></property>
+	     	<property name="url" value="${jdbc.url}"></property>
+	     	<property name="username" value="${jdbc.uname}"></property>
+	     	<property name="password" value="${jdbc.pass}"></property>
+		</bean>
+		
+		<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+	    	<property name="dataSource" ref="ds"></property>
+		</bean>
+		
+        <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        	<property name="prefix" value="/WEB-INF/Views/" />
+        	<property name="suffix" value=".jsp" />
+    	</bean>
+
+--------------------------------------------------------------------------------------------------------------------------
+
+taglib
+<%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+
+<div align="center">
+	<table border=2>
+		<tr>
+			<th>Prod_Id</th>
+			<th>Prod_Desc</th>
+			<th>Action</th>
+		</tr>
+		<c:forEach var="p" items="${plist}">
+		<tr>
+			<td>${p.pid}</td>
+			<td>${p.desc}</td>
+			<td>
+				<a href= delete/${p.pid}>Delete</a>/
+				<a href= edit/${p.pid}>Edit</a>
+			</td>
+		</tr>
+		</c:forEach>
+	</table>
+	<br>
+	<a href="addProduct">Add New Product</a>
+</div>
+--------------------------------------------------------------------------------------------------------------------------
